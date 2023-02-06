@@ -1,23 +1,22 @@
-;; Melpa
-(require 'package)
- (add-to-list 'package-archives
-              '("melpa" . "https://melpa.org/packages/") t)
- (package-initialize)
- (package-refresh-contents)
+; list the packages you want
+(setq package-list '(rust-mode))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(use-package lsp-mode rustic go-mode rust-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+; list the repositories containing them
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")))
 
+; activate all the packages (in particular autoloads)
+(package-initialize)
+
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+;; Rust
 (require 'rust-mode)
 
 ;; Prompt before exiting emacs
