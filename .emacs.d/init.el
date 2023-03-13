@@ -19,6 +19,10 @@
 ;; Rust
 (require 'rust-mode)
 
+;; Java
+(add-hook 'java-mode-hook (lambda ()
+                            (setq-default indent-tabs-mode nil)))
+
 ;; Prompt before exiting emacs
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
